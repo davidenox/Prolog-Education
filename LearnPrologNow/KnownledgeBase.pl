@@ -43,8 +43,11 @@ loves(honey_bunny,pumpkin).
 
 %come se indicasse la relazione vincent-loves-mia
 %se chiedo ?-loves(X,mia). avrò come risultato vincent e marsellus
-%identifico X come l'incognita da trovare come richiesta
+%identifico X come l''incognita da trovare come richiesta
 
 % KB5
 
+jealous(X,Y):- loves(X,Z), loves(Y,Z).
+
+% questa regola dice che X sarà geloso di Y se esiste uno Z che X ama, ed Y ama lo stesso Z
 
