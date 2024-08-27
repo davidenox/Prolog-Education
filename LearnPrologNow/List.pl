@@ -39,3 +39,22 @@
 member(X,[X,T]).
 member(X,[H,T]) :- member(X,T).
 
+
+/* 1. Un elemento X è all'interno di una lista se è la sua Head,
+ * 2. Un elemento X è all'interno di una lista se fa parte della sua Tail
+ * 
+ * Ciò vuol dire che la member verifica inizialmente che X = H. Se è così, l'output è Yes.
+ * Se non è così, effettua lo stesso identico controllo escludendo però la Head, in modo
+ * che il primo elemento della Tail diventi una nuova Head, e se il controllo non va a
+ * buon fine, continuerà ricorsivamente a rimpiazzare la vecchia Head con una nuova scorrendo
+ * nella lista, fino a terminarne gli elementi se necessario. Se l'elemento si trova da 
+ * qualche parte nella tail, quando arriverà il controllo giusto, darà output Yes. Se si 
+ * arriva al termine della Tail, formando una lista vuota, senza un responso positivo, 
+ * l'elemento non sarà nella lista e l'output sarà No.*/
+
+/*Ricorsioni di liste dal basso*/
+
+a2b([a|Ta],[b|Tb]):-a2b(Ta,Tb).
+
+/*Goal: a2b è l'unione delle code di due liste che hanno come Head rispettivamente a e b*/
+
