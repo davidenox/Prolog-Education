@@ -58,3 +58,78 @@ a2b([a|Ta],[b|Tb]):-a2b(Ta,Tb).
 
 /*Goal: a2b è l'unione delle code di due liste che hanno come Head rispettivamente a e b*/
 
+/* Append */
+
+append([],L,L).
+append([H|T],L2,[H|L3]) :- 
+    append(T,L2,L3).
+/* Quando si concatena una lista non vuota [H|T] con un'altra lista L2, il risultato è
+ * formato dalla lista la cui Head è H e la cui Tail è il risultato di concatenazione 
+ * tra T e L2
+ * 
+ * Input: [H|T]+L2
+ * 
+ * Output: [H|T+L2]
+ * 			   |
+ * 			   ->L3
+ */
+
+/* Esempio di utilizzo:
+ * 
+ * ?- append([a,b,c],[1,2,3],X) .
+ * Output: X = [a, b, c, 1, 2, 3]
+ * 
+ * ?- append(X,Y,[a,b,c,d]).
+ * Output:
+ * X				Y	
+[]				[a, b, c, d]	
+[a]				[b, c, d]	
+[a, b]			[c, d]	
+[a, b, c]		[d]	
+[a, b, c, d]	[]	
+ */
+
+/* Prefisso di una lista */
+
+prefix(P,L):- 
+    append(P,_,L).
+
+/* Suffisso di una lista */
+
+suffix(S,L) :-
+    append(_,S,L).
+
+/* Sottolista */
+
+sublist(SubL,L):-
+    suffix(S,L),
+    prefix(SubL,S).
+
+/* Input: ?- sublist(X,[1,2,3,4,5]).
+ * Output:
+ * X	
+1	[]	
+2	[1]	
+3	[1, 2]	
+4	[1, 2, 3]	
+5	[1, 2, 3, 4]	
+6	[1, 2, 3, 4, 5]	
+7	[]	
+8	[2]	
+9	[2, 3]	
+10	[2, 3, 4]	
+11	[2, 3, 4, 5]	
+12	[]	
+13	[3]	
+14	[3, 4]	
+15	[3, 4, 5]	
+16	[]	
+17	[4]	
+18	[4, 5]	
+19	[]	
+20	[5]	
+21	[]
+ * 
+ * */
+
+/* Reverse della lista */
