@@ -133,3 +133,27 @@ sublist(SubL,L):-
  * */
 
 /* Reverse della lista */
+
+naiverev([],[]).
+naiverev([H|T],R):-
+    naiverev(T,RevT),
+    append(RevT,[H],R).
+
+/* Molto inefficiente e difficile da comprendere */
+
+/* Reverse con un accumulatore */
+
+accRev([H|T],A,R):-
+    accRev(T,[H|A],R).
+accRev([],A,A).
+
+/* Prende la Head della prima lista e la mette come Head della seconda, poi riprende la nuova Head
+ * della prima lista e la rende nuova Head della seconda lista, spostando la vecchia Head della 
+ * seconda lista nella Tail,e così via fino ad arrivare al caso base, in cui restituisce 
+ * l'accumulatore, ovvero la lista rivoltata.
+ */
+
+/* Può essere ottimizzata */
+
+rev(L,R):-
+    accRev(L,[],R).
