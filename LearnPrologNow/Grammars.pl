@@ -122,9 +122,9 @@ t --> l,t,r.
 l --> [a].
 r --> [b].
 
-/* Extra */
+/* Argomento Extra */
 
-/* Questa è la DCG su cui abbiamo lavorato fino ad ora:*/
+/* Questa è la DCG su cui abbiamo lavorato fino ad ora: */
 
 s --> np,vp.
 
@@ -210,9 +210,50 @@ v --> [shoots].
  * ?- s(np(det(a),n(woman)),vp(v(shoots))).
  * Non è di certo bello da vedere, ma l'informazione è racchiusa in questa query
  * 
- * Una DCG deve
- * 
+ * Una DCG deve capire qual è la struttura ad albero quando riconosce una frase. Quindi 
+ * basta trovare un metodo per tenere tracciia della struttura che la DCG trova, ovvero
+ * in questo modo:
  * */
+
+s(s(NP,VP)) --> np(NP),vp(VP).
+
+np(np(DET,N)) --> det(DET),n(N).
+
+vp(vp(V,NP)) --> v(V),np(NP).
+vp(vp(V))    --> v(V).
+
+det(det(the)) --> [the].
+det(det(a))   --> [a].
+
+n(n(woman)) --> [woman].
+n(n(man))   --> [man].
+
+v(v(shoots)) --> [shoots].
+
+/* Essenzialmente stiamo costruendo gli alberi di analisi per le categorie sintattiche 
+ * sul lato sinistro delle regole a partire dagli alberi di analisi per le categorie 
+ * sintattiche sul lato destro delle regole. Considera la regola:
+ * 
+ * vp(vp(V,NP)) --> v(V),np(NP) . 
+ * 
+ * Quando eseguiamo una query utilizzando questo DCG, la V in v(V) e la NP in np(NP) 
+ * verranno istanziate in termini che rappresentano alberi di analisi. Ad esempio, 
+ * forse verrà istanziata V come 
+ * 
+ * v(shoots)
+ * 
+ * e NP sarà istanziata come
+ * 
+ * np(det(a),n(woman)).
+ * 
+ * Di conseguenza:
+ * ?- vp(v(shoots),np(det(a),n(woman))).
+ * */ 
+
+
+
+
+
 
 
 
