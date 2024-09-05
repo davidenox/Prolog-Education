@@ -1,3 +1,5 @@
+/*  Data una scacchiera 8x8, posizionare 8 regine in modo tale che nessuna delle regine possa mangiare le altre tramite una sola mossa. */
+
 regine(N,Soluzione):-
     genera(N, Soluzione),               % Genera la soluzione
     safe(Soluzione).                    % Controlla che la soluzione sia valida

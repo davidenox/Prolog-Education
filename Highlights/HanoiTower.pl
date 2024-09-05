@@ -1,3 +1,8 @@
+/* Risolvere il problema delle torre di Hanoi: è un rompicapo matematico composto da tre paletti e un certo numero di dischi di 
+grandezza decrescente, che possono essere infilati in uno qualsiasi dei paletti. Lo scopo del gioco è portare tutti i dischi su 
+un paletto diverso, potendo spostare solo un disco alla volta e potendo mettere un disco solo su un altro disco più grande, mai 
+su uno più piccolo. */
+
 valida(L):-
     ordinata(L).
 
